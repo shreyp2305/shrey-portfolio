@@ -9,7 +9,7 @@ export default function ExperiencePage() {
           href="/resume.pdf"
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-block rounded-2xl bg-[var(--primary)] px-6 py-3 font-medium text-[var(--primary-foreground)] transition hover:opacity-90"
+          className="bg-primary text-primary-foreground inline-block rounded-2xl px-6 py-3 font-medium transition hover:opacity-90"
         >
           View Resume
         </a>
@@ -19,7 +19,7 @@ export default function ExperiencePage() {
         {EXPERIENCES.map((exp, idx) => (
           <div key={idx} className="border-border border-b pb-4">
             <h2 className="text-xl font-semibold">{exp.role}</h2>
-            <p className="text-sm text-[var(--muted-foreground)]">
+            <p className="text-muted-foreground text-sm">
               {exp.company} | {exp.date}
             </p>
             <p className="mt-2">{exp.description}</p>
