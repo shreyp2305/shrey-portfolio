@@ -17,7 +17,7 @@ export default function Contact() {
       <div className="flex flex-col items-center gap-4">
         <Link
           href={mailTo}
-          className="flex w-56 items-center justify-center gap-2 rounded-2xl border bg-[var(--primary)] p-3 text-[var(--primary-foreground)] shadow-sm transition hover:opacity-90"
+          className="flex w-56 items-center justify-center gap-2 rounded-2xl border bg-primary p-3 text-primary-foreground shadow-sm transition hover:opacity-90"
         >
           <Mail size={20} />
           <span>Email</span>
@@ -26,7 +26,7 @@ export default function Contact() {
           href={CONTACT.linkedin}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex w-56 items-center justify-center gap-2 rounded-2xl border bg-[var(--primary)] p-3 text-[var(--primary-foreground)] shadow-sm transition hover:opacity-90"
+          className="flex w-56 items-center justify-center gap-2 rounded-2xl border bg-primary p-3 text-primary-foreground shadow-sm transition hover:opacity-90"
         >
           <Linkedin size={20} />
           <span>LinkedIn</span>
@@ -35,7 +35,7 @@ export default function Contact() {
           href={CONTACT.github}
           target="_blank"
           rel="noopener noreferrer"
-          className="flex w-56 items-center justify-center gap-2 rounded-2xl border bg-[var(--primary)] p-3 text-[var(--primary-foreground)] shadow-sm transition hover:opacity-90"
+          className="flex w-56 items-center justify-center gap-2 rounded-2xl border bg-primary p-3 text-primary-foreground shadow-sm transition hover:opacity-90"
         >
           <Github size={20} />
           <span>GitHub</span>

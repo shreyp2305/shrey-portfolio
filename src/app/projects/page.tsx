@@ -6,7 +6,7 @@ export default function Projects() {
   return (
     <main className="mx-auto max-w-4xl p-6">
       <H1 className="mb-4">Projects</H1>
-      <p className="mb-8 text-[var(--muted-foreground)]">
+      <p className="mb-8 text-muted-foreground">
         A collection of things I’ve built. Each project reflects my interests
         and skills.
       </p>
@@ -16,13 +16,13 @@ export default function Projects() {
             key={idx}
             className="border-border bg-card rounded-2xl border p-4 shadow-sm"
           >
-            <h2 className="text-xl font-semibold text-[var(--card-foreground)]">
+            <h2 className="text-xl font-semibold text-card-foreground">
               {project.title}
             </h2>
-            <p className="mt-2 text-sm text-[var(--card-foreground)]">
+            <p className="mt-2 text-sm text-card-foreground">
               {project.description}
             </p>
-            <p className="mt-1 text-xs text-[var(--muted-foreground)]">
+            <p className="mt-1 text-xs text-muted-foreground">
               Tools: {project.tools.join(", ")}
             </p>
             {project.link && (
@@ -30,7 +30,7 @@ export default function Projects() {
                 href={project.link}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-3 inline-block font-medium text-[var(--primary)] hover:underline"
+                className="mt-3 inline-block font-medium text-primary hover:underline"
               >
                 View Project →
               </Link>
