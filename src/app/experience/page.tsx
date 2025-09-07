@@ -11,7 +11,7 @@ export default function ExperiencePage() {
           rel="noopener noreferrer"
           className="bg-primary text-primary-foreground inline-block rounded-2xl px-6 py-3 font-medium transition hover:opacity-90"
         >
-          View Resume
+          My Resume
         </a>
       </div>
 
