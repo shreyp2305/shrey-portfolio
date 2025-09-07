@@ -1,6 +1,7 @@
 import { Mail, Github, Linkedin } from "lucide-react";
 import { CONTACT } from "@/data/portfolioConfig";
 import Link from "next/link";
+import { H1 } from "@/components/ui/H1";
 
 export default function Contact() {
   // Build mailto link once, with encoded params
@@ -10,7 +11,7 @@ export default function Contact() {
 
   return (
     <main className="mx-auto max-w-3xl p-6 text-center">
-      <h1 className="mb-4 text-3xl font-bold">Contact Me</h1>
+      <H1 className="mb-4 text-3xl font-bold">Contact Me</H1>
       <p className="text-muted-foreground mb-8">
         Let’s connect! Reach out through any of the links below.
       </p>
