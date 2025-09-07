@@ -15,7 +15,7 @@ export default function Contact() {
       <p className="text-muted-foreground mb-8">
         Let’s connect! Reach out through any of the links below.
       </p>
-      <div className="flex flex-col items-center gap-4">
+      <div className="flex flex-row items-center gap-4">
         <Link
           href={mailTo}
           className="bg-primary text-primary-foreground flex w-56 items-center justify-center gap-2 rounded-2xl border p-3 shadow-sm transition hover:opacity-90"

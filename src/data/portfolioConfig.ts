@@ -12,7 +12,7 @@ export const PROJECTS = [
     description:
       "A website to display my projects, experience, and technical skills.",
     link: "https://github.com/shreyp2305/shrey-portfolio",
-    tools: ["React", "Next.js", "Tailwind", "OpenAI", "Vercel"],
+    tools: ["Next.js", "OpenAI", "LangChain", "Redis", "Vercel"],
   },
   {
     title: "Jobhub",
@@ -40,7 +40,7 @@ export const PROJECTS = [
     description:
       "A Tinder-inspired carpooling system that intelligently matches commuters based on their routes",
     link: "https://devpost.com/software/cinder-4fr06j",
-    tools: ["React", "Express", "MongoDB", "NodeJS"],
+    tools: ["MongoDB", "Express", "React", "NodeJS"],
   },
   // Add more projects here
 ];
@@ -58,7 +58,7 @@ export const EXPERIENCES = [
     company: "CACI",
     date: "Summer 2024",
     description:
-      "Contributed to the development and optimization of a large-scale ERP platform serving over 35 federal agencies. Focused on improving database performance, designing schemas and pipelines for faster data access, and building dashboards that enabled self-service reporting. My efforts helped the platform become more efficient and responsive, supporting critical reporting and operational needs across multiple organizations.",
+      "Contributed to the development and optimization of a large-scale ERP platform serving over 35 federal agencies. My work focused on improving database performance, designing pipelines, and building dynamic dashboards to support critical reporting and operational needs across multiple organizations.",
   },
   {
     role: "Teaching Assistant",
