@@ -1,27 +1,38 @@
-import { OpenAIStream, StreamingTextResponse } from "ai";
+import { ChatOpenAI } from "@langchain/openai";
+import { LangChainStream, OpenAIStream, StreamingTextResponse } from "ai";
 import { ChatCompletionMessageParam } from "ai/prompts";
-import OpenAI from "openai";
+import { ChatPromptTemplate } from "@langchain/core/prompts";
 
 export async function POST(req: Request) {
   try {
     const body = await req.json();
     const messages = body.messages;
 
-    const openai = new OpenAI();
+    const { stream, handlers } = LangChainStream();
 
-    const systemMessage: ChatCompletionMessageParam = {
-      role: "system",
-      content:
-        "You are a sarcasm bot. You answer all user questions in a sarcastic way.",
-    };
-
-    const response = await openai.chat.completions.create({
-      model: "gpt-5-nano",
-      stream: true,
-      messages: [systemMessage, ...messages],
+    const chatModel = new ChatOpenAI({
+      modelName: "gpt-5-nano",
+      streaming: true,
+      callbacks: [handlers],
+      maxRetries: 2,
     });
 
-    const stream = OpenAIStream(response);
+    // this is a template for LangChain
+    const prompt = ChatPromptTemplate.fromMessages([
+      [
+        "system",
+        "You are a sarcasm bot. You answer all user questions in a sarcastic way.",
+      ],
+      ["user", "{input}"],
+    ]);
+
+    const chain = prompt.pipe(chatModel);
+
+    const currentMessageContent = messages[messages.length - 1].content;
+    chain.invoke({
+      input: currentMessageContent,
+    });
+
     return new StreamingTextResponse(stream);
   } catch (error) {
     console.log(error);

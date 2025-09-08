@@ -1,6 +1,12 @@
 import { H1 } from "@/components/ui/H1";
 import { H2 } from "@/components/ui/H2";
 import { EXPERIENCES } from "@/data/portfolioConfig";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "My Experience",
+  description: "Learn more about my experience as a software engineer.",
+};
 
 export default function ExperiencePage() {
   return (
@@ -11,7 +17,7 @@ export default function ExperiencePage() {
           href="/resume.pdf"
           target="_blank"
           rel="noopener noreferrer"
-          className="bg-primary text-primary-foreground inline-block rounded-2xl px-6 py-3 font-medium transition hover:opacity-90"
+          className="inline-block rounded-2xl bg-primary px-6 py-3 font-medium text-primary-foreground transition hover:opacity-90"
         >
           My Resume
         </a>
@@ -19,9 +25,9 @@ export default function ExperiencePage() {
 
       <div className="space-y-6">
         {EXPERIENCES.map((exp, idx) => (
-          <div key={idx} className="border-border border-b pb-4">
+          <div key={idx} className="border-b border-border pb-4">
             <H2 className="text-xl font-semibold">{exp.role}</H2>
-            <p className="text-muted-foreground text-sm">
+            <p className="text-sm text-muted-foreground">
               {exp.company} | {exp.date}
             </p>
             <p className="mt-2">{exp.description}</p>
