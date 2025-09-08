@@ -71,6 +71,7 @@ async function generateEmbeddings() {
   const splitDocs = await splitter.splitDocuments(docs);
 
   await vectorStore.addDocuments(splitDocs);
+  console.log(splitDocs);
 }
 
 generateEmbeddings();

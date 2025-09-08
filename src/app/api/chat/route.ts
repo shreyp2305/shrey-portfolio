@@ -1,6 +1,5 @@
 import { ChatOpenAI } from "@langchain/openai";
-import { LangChainStream, OpenAIStream, StreamingTextResponse } from "ai";
-import { ChatCompletionMessageParam } from "ai/prompts";
+import { LangChainStream, StreamingTextResponse } from "ai";
 import { ChatPromptTemplate } from "@langchain/core/prompts";
 import { createStuffDocumentsChain } from "langchain/chains/combine_documents";
 import { getVectorStore } from "@/lib/astradb";
