@@ -1,4 +1,4 @@
-import { AstraDB } from "@datastax/astra-db-ts";
+import { DataAPIClient } from "@datastax/astra-db-ts";
 import { AstraDBVectorStore } from "@langchain/community/vectorstores/astradb";
 import { OpenAIEmbeddings } from "@langchain/openai";
 
@@ -16,9 +16,9 @@ export async function getVectorStore() {
   return AstraDBVectorStore.fromExistingIndex(
     new OpenAIEmbeddings({ modelName: "text-embedding-3-small" }),
     {
-      token,
-      endpoint,
-      collection,
+      token: token,
+      endpoint: endpoint,
+      collection: collection,
       collectionOptions: {
         vector: {
           dimension: 1536,
@@ -30,5 +30,7 @@ export async function getVectorStore() {
 }
 
 export async function getEmbeddingsCollection() {
-  return new AstraDB(token, endpoint).collection(collection);
+  const client = new DataAPIClient();
+  const database = client.db(endpoint, { token: token });
+  return database.collection(collection);
 }
