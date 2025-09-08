@@ -34,11 +34,11 @@ export async function POST(req: Request) {
       modelName: "gpt-5-nano",
       streaming: true,
       callbacks: [handlers],
-      verbose: true,
+      // verbose: true,
     });
     const rephrasingModel = new ChatOpenAI({
       modelName: "gpt-5-nano",
-      verbose: true,
+      // verbose: true,
     });
     const retriever = (await getVectorStore()).asRetriever();
 
