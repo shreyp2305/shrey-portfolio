@@ -1,8 +1,3 @@
-import personal_portfolio_website_image from "@/assets/personal-portfolio-website.png";
-import jobhub_image from "@/assets/jobhub.png";
-import house_inc_image from "@/assets/house_inc.png";
-import cinder from "@/assets/cinder.png";
-
 export const CONTACT = [
   {
     platform: "Email",
@@ -18,7 +13,7 @@ export const PROJECTS = [
     description:
       "A website to display my projects, experience, and technical skills.",
     link: "https://github.com/shreyp2305/shrey-portfolio",
-    image: personal_portfolio_website_image,
+    imageKey: "personal_portfolio_website_image",
     achievements: [
       "Built an AI-powered chatbot that answers natural language questions about portfolio content.",
       "Orchestrated retrieval-augmented generation (RAG) through LangChain and Vercel’s AI SDK with GPT-5-nano.",
@@ -41,7 +36,7 @@ export const PROJECTS = [
     description:
       "Virginia Tech’s official portal for managing industry partnership programs and department workflows.",
     link: "https://cssource-jh.discovery.cs.vt.edu/",
-    image: jobhub_image,
+    imageKey: "jobhub_image",
     achievements: [
       "Worked in a 5-person team to develop a web portal for Virginia Tech to manage its industry partnership programs.",
       "Enhanced Flask endpoints in Python, expanding parameters and enforcing JWT RBAC for confidential data.",
@@ -54,27 +49,19 @@ export const PROJECTS = [
     description:
       "A housing recommendation platform that helps users find housing and roommates using a conversational search assistant.",
     link: "https://devpost.com/software/house-inc",
-    image: house_inc_image,
+    imageKey: "house_inc_image",
     achievements: [
       "Took ownership of backend development in a team of 4, designing service layer components within a client-server architecture for housing recommendations.",
       "Integrated Azure AI for natural language query parsing, enabling contextual housing search via a conversational assistant.",
     ],
     tools: ["React", "Spring Boot", "MySQL", "AzureAI"],
   },
-  // {
-  //   title: "Blu-pay",
-  //   description:
-  //     "An app to simplify real-time expense splitting among friends, leveraging Bluetooth to detect nearby devices.",
-  //   link: "https://github.com/czarthak/BluPay",
-  //   achievements: [],
-  //   tools: ["Kotlin", "Android Studio"],
-  // },
   {
     title: "Cinder",
     description:
       "A Tinder-inspired carpooling system that intelligently matches commuters based on their routes",
     link: "https://devpost.com/software/cinder-4fr06j",
-    image: cinder,
+    imageKey: "cinder_image",
     achievements: [],
     tools: ["MongoDB", "Express", "React", "NodeJS"],
   },
@@ -139,7 +126,7 @@ export const EXPERIENCES = [
     tools: [
       "Express",
       "Angular",
-      "Azure AD B2C",
+      "Azure AD",
       "Kubernetes",
       "Jenkins",
       "Mocha",

@@ -2,11 +2,22 @@ import { H1 } from "@/components/ui/H1";
 import { PROJECTS } from "@/data/portfolioConfig";
 import Link from "next/link";
 import { Metadata } from "next";
-import Image from "next/image";
+import Image, { StaticImageData } from "next/image";
+import personal_portfolio_website_image from "@/assets/personal-portfolio-website.png";
+import jobhub_image from "@/assets/jobhub.png";
+import house_inc_image from "@/assets/house-inc.png";
+import cinder_image from "@/assets/cinder.png";
 
 export const metadata: Metadata = {
   title: "My Projects",
   description: "Learn more about my personal projects.",
+};
+
+const imageMap: Record<string, StaticImageData> = {
+  personal_portfolio_website_image,
+  jobhub_image,
+  house_inc_image,
+  cinder_image,
 };
 
 export default function Projects() {
@@ -24,10 +35,10 @@ export default function Projects() {
             className="flex flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-sm transition hover:shadow-md"
           >
             {/* Project Image */}
-            {project.image && (
+            {imageMap[project.imageKey] && (
               <div className="relative h-40 w-full">
                 <Image
-                  src={project.image}
+                  src={imageMap[project.imageKey]}
                   alt={project.title}
                   fill
                   className="object-cover"
