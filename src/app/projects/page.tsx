@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Metadata } from "next";
 import Image, { StaticImageData } from "next/image";
 import personal_portfolio_website_image from "@/assets/personal-portfolio-website.png";
-// import jobhub_image from "@/assets/jobhub.png";
+import jobhub_image from "@/assets/jobhub.png";
 import house_inc_image from "@/assets/house-inc.png";
 import cinder_image from "@/assets/cinder.png";
 
@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 
 const imageMap: Record<string, StaticImageData> = {
   personal_portfolio_website_image,
-  // jobhub_image,
+  jobhub_image,
   house_inc_image,
   cinder_image,
 };
