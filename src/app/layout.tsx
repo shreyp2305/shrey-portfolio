@@ -31,7 +31,7 @@ export default function RootLayout({
       <body className={`${inter.className} antialiased`}>
         <ThemeProvider attribute="class" defaultTheme="light">
           <Navbar />
-          <main className="mx-auto max-w-3xl px-3 py-10">{children}</main>
+          <main className="mx-auto px-3 py-10">{children}</main>
           {/* <Footer /> */}
         </ThemeProvider>
       </body>

@@ -4,16 +4,35 @@ import AIChatButton from "./AIChatButton";
 
 export default function Navbar() {
   return (
-    <header className="bg-background sticky top-0">
-      <div className="mx-auto flex max-w-3xl flex-wrap justify-between gap-3 px-3 py-4">
-        <nav className="space-x-4 font-medium">
-          <Link href="/">Home</Link>
-          {/* <Link href="/about">About</Link> */}
-          <Link href="/projects">Projects</Link>
-          <Link href="/experience">Experience</Link>
-          <Link href="/contact">Contact</Link>
+    <header className="sticky top-0 z-50 w-full border-b border-border bg-background">
+      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
+        {/* Left side nav links */}
+        <nav className="flex items-center gap-8 text-lg font-semibold">
+          <Link href="/" className="transition-colors hover:text-primary">
+            Home
+          </Link>
+          <Link
+            href="/projects"
+            className="transition-colors hover:text-primary"
+          >
+            Projects
+          </Link>
+          <Link
+            href="/experience"
+            className="transition-colors hover:text-primary"
+          >
+            Experience
+          </Link>
+          <Link
+            href="/contact"
+            className="transition-colors hover:text-primary"
+          >
+            Contact
+          </Link>
         </nav>
-        <div className="flex items-center gap-4">
+
+        {/* Right side controls */}
+        <div className="flex items-center gap-6">
           <AIChatButton />
           <ThemeToggle />
         </div>
