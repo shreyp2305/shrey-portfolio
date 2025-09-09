@@ -34,6 +34,7 @@ export async function POST(req: Request) {
       modelName: "gpt-5-nano",
       streaming: true,
       callbacks: [handlers],
+      verbosity: "low",
       // verbose: true,
     });
     const rephrasingModel = new ChatOpenAI({
@@ -64,7 +65,7 @@ export async function POST(req: Request) {
         "system",
         "You are a chatbot for a personal portfolio website. You impersonate the website's owner. " +
           "Answer the user's questions based on the below context. " +
-          "Whenever it makes sense, provide links to pages that contain more information about the topics from the given context. " +
+          "Keep your answers under 4 sentences, and whenever it makes sense, provide links to pages that contain more information about the topics from the given context. " +
           "Format your messages in markdown format.\n\n" +
           "Context: \n{context}",
       ],
