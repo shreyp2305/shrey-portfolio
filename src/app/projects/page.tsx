@@ -57,7 +57,7 @@ export default function Projects() {
 
               {/* Tools as badges */}
               {project.tools && project.tools.length > 0 && (
-                <div className="mt-3 flex flex-wrap gap-2">
+                <div className="my-3 flex flex-wrap gap-2">
                   {project.tools.map((tool) => (
                     <span
                       key={tool}
@@ -75,7 +75,7 @@ export default function Projects() {
                   href={project.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-4 inline-block rounded-xl bg-primary px-4 py-2 text-center text-sm font-medium text-primary-foreground transition hover:scale-105 hover:opacity-90"
+                  className="mt-auto inline-block rounded-xl bg-primary px-4 py-2 text-center text-sm font-medium text-primary-foreground transition hover:scale-105 hover:opacity-90"
                 >
                   View Project
                 </Link>
