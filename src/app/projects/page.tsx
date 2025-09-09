@@ -1,23 +1,33 @@
+"use client";
+
 import { H1 } from "@/components/ui/H1";
 import { PROJECTS } from "@/data/portfolioConfig";
 import Link from "next/link";
-import { Metadata } from "next";
 import Image, { StaticImageData } from "next/image";
+import { motion } from "framer-motion";
+
 import personal_portfolio_website_image from "@/assets/personal-portfolio-website.png";
 import jobhub_image from "@/assets/jobhub.png";
 import house_inc_image from "@/assets/house-inc.png";
 import cinder_image from "@/assets/cinder.png";
-
-export const metadata: Metadata = {
-  title: "My Projects",
-  description: "Learn more about my personal projects.",
-};
 
 const imageMap: Record<string, StaticImageData> = {
   personal_portfolio_website_image,
   jobhub_image,
   house_inc_image,
   cinder_image,
+};
+
+const containerVariants = {
+  hidden: {},
+  show: {
+    transition: { staggerChildren: 0.1 },
+  },
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.4 } },
 };
 
 export default function Projects() {
@@ -28,13 +38,20 @@ export default function Projects() {
         A collection of things I’ve built. Each project reflects my interests
         and skills.
       </p>
-      <div className="grid gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+
+      <motion.div
+        className="grid gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true }}
+      >
         {PROJECTS.map((project, idx) => (
-          <div
+          <motion.div
             key={idx}
             className="flex flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-sm transition hover:shadow-md"
+            variants={cardVariants}
           >
-            {/* Project Image */}
             {imageMap[project.imageKey] && (
               <div className="relative h-40 w-full">
                 <Image
@@ -46,7 +63,6 @@ export default function Projects() {
               </div>
             )}
 
-            {/* Project Content */}
             <div className="flex flex-1 flex-col p-5">
               <h2 className="text-xl font-semibold text-card-foreground">
                 {project.title}
@@ -55,7 +71,6 @@ export default function Projects() {
                 {project.description}
               </p>
 
-              {/* Tools as badges */}
               {project.tools && project.tools.length > 0 && (
                 <div className="my-3 flex flex-wrap gap-2">
                   {project.tools.map((tool) => (
@@ -69,7 +84,6 @@ export default function Projects() {
                 </div>
               )}
 
-              {/* Link button */}
               {project.link && (
                 <Link
                   href={project.link}
@@ -81,9 +95,9 @@ export default function Projects() {
                 </Link>
               )}
             </div>
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </main>
   );
 }

@@ -1,10 +1,19 @@
+"use client";
+
 import { H1 } from "@/components/ui/H1";
 import { EXPERIENCES } from "@/data/portfolioConfig";
-import { Metadata } from "next";
+import { motion } from "framer-motion";
 
-export const metadata: Metadata = {
-  title: "My Experience",
-  description: "Learn more about my experience as a software engineer.",
+const containerVariants = {
+  hidden: {},
+  show: {
+    transition: { staggerChildren: 0.1 },
+  },
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 20 },
+  show: { opacity: 1, y: 0, transition: { duration: 0.4 } },
 };
 
 export default function ExperiencePage() {
@@ -22,11 +31,18 @@ export default function ExperiencePage() {
         </a>
       </div>
 
-      <div className="grid gap-6">
+      <motion.div
+        className="grid gap-6"
+        variants={containerVariants}
+        initial="hidden"
+        whileInView="show"
+        viewport={{ once: true }}
+      >
         {EXPERIENCES.map((exp, idx) => (
-          <div
+          <motion.div
             key={idx}
             className="rounded-2xl border border-border bg-card p-6 shadow-sm transition hover:shadow-md"
+            variants={cardVariants}
           >
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
               <h2 className="text-xl font-semibold">
@@ -51,9 +67,9 @@ export default function ExperiencePage() {
                 ))}
               </div>
             )}
-          </div>
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </div>
   );
 }
