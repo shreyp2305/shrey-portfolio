@@ -22,13 +22,13 @@ const imageMap: Record<string, StaticImageData> = {
 
 export default function Projects() {
   return (
-    <main className="mx-auto max-w-3xl p-6">
+    <main className="mx-auto max-w-5xl p-6">
       <H1 className="mb-4 text-3xl font-bold">Projects</H1>
       <p className="mb-10 text-muted-foreground">
         A collection of things I’ve built. Each project reflects my interests
         and skills.
       </p>
-      <div className="grid gap-8 sm:grid-cols-2">
+      <div className="grid gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
         {PROJECTS.map((project, idx) => (
           <div
             key={idx}
