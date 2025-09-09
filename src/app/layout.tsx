@@ -29,7 +29,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={`${inter.className} antialiased`}>
-        <ThemeProvider attribute="class" defaultTheme="light">
+        <ThemeProvider attribute="class" defaultTheme="dark">
           <Navbar />
           <main className="mx-auto px-3 py-10">{children}</main>
           {/* <Footer /> */}
