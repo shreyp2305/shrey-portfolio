@@ -3,7 +3,7 @@ import { Inter, Poppins } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import Navbar from "@/components/Navbar";
-// import Footer from "@/components/Footer";
+import { Analytics } from "@vercel/analytics/next";
 
 const inter = Inter({ subsets: ["latin"] });
 const poppins = Poppins({
@@ -32,8 +32,8 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="dark">
           <Navbar />
           <main className="mx-auto px-3 py-10">{children}</main>
-          {/* <Footer /> */}
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );

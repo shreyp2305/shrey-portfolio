@@ -15,6 +15,7 @@
     "@langchain/core": "^0.3.75",
     "@langchain/openai": "^0.6.11",
     "@upstash/redis": "^1.28.2",
+    "@vercel/analytics": "^1.5.0",
     "ai": "^2.2.32",
     "clsx": "^2.1.0",
     "dotenv": "^16.4.1",
@@ -42,5 +43,8 @@
     "prettier-plugin-tailwindcss": "^0.5.11",
     "tailwindcss": "^3.3.0",
     "typescript": "^5"
+  },
+  "overrides": {
+    "svelte": "4.2.20"
   }
 }
