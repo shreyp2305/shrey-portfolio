@@ -31,14 +31,14 @@ export async function POST(req: Request) {
     const { stream, handlers } = LangChainStream();
 
     const chatModel = new ChatOpenAI({
-      modelName: "gpt-5-nano",
+      modelName: "gpt-5",
       streaming: true,
       callbacks: [handlers],
       verbosity: "low",
       // verbose: true,
     });
     const rephrasingModel = new ChatOpenAI({
-      modelName: "gpt-5-nano",
+      modelName: "gpt-5",
       // verbose: true,
     });
     const retriever = (await getVectorStore()).asRetriever();
