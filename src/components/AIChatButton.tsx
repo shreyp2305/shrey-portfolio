@@ -5,7 +5,7 @@ import { useState } from "react";
 import AIChatBox from "./AIChatBox";
 
 export default function AIChatButton() {
-  const [chatBoxOpen, setChatBoxOpen] = useState(false);
+  const [chatBoxOpen, setChatBoxOpen] = useState(true);
 
   return (
     <>

@@ -14,9 +14,15 @@ import { getVectorStore } from "@/lib/astradb";
 import { createRetrievalChain } from "langchain/chains/retrieval";
 import { HumanMessage, AIMessage } from "@langchain/core/messages";
 import { createHistoryAwareRetriever } from "langchain/chains/history_aware_retriever";
+import { UpstashRedisCache } from "@langchain/community/caches/upstash_redis";
+import { Redis } from "@upstash/redis";
 
 export async function POST(req: Request) {
   try {
+    const cache = new UpstashRedisCache({
+      client: Redis.fromEnv(),
+    });
+
     const body = await req.json();
     const messages = body.messages;
     const currentMessageContent = messages[messages.length - 1].content;
@@ -35,11 +41,12 @@ export async function POST(req: Request) {
       streaming: true,
       callbacks: [handlers],
       verbosity: "low",
-      // verbose: true,
+      cache,
     });
     const rephrasingModel = new ChatOpenAI({
       modelName: "gpt-5",
-      // verbose: true,
+      verbose: true,
+      cache,
     });
     const retriever = (await getVectorStore()).asRetriever();
 
