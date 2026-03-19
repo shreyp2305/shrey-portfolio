@@ -19,9 +19,9 @@ import { Redis } from "@upstash/redis";
 
 export async function POST(req: Request) {
   try {
-    const cache = new UpstashRedisCache({
-      client: Redis.fromEnv(),
-    });
+    // const cache = new UpstashRedisCache({
+    //   client: Redis.fromEnv(),
+    // });
 
     const body = await req.json();
     const messages = body.messages;
@@ -41,12 +41,12 @@ export async function POST(req: Request) {
       streaming: true,
       callbacks: [handlers],
       verbosity: "low",
-      cache,
+      // cache,
     });
     const rephrasingModel = new ChatOpenAI({
       modelName: "gpt-5",
       verbose: true,
-      cache,
+      // cache,
     });
     const retriever = (await getVectorStore()).asRetriever();
 

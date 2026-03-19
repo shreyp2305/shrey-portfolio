@@ -9,7 +9,6 @@ import { motion } from "framer-motion";
 export default function Home() {
   return (
     <main className="mx-auto max-w-5xl space-y-20 px-4 py-16">
-      {/* Hero */}
       <section className="grid grid-cols-1 items-center gap-12 sm:grid-cols-2">
         <motion.div
           initial={{ opacity: 0, x: -40 }}
