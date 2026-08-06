@@ -35,7 +35,7 @@ export const PROJECTS = [
     title: "Jobhub",
     description:
       "Virginia Tech’s official portal for managing industry partnership programs and department workflows.",
-    link: "https://cssource-jh.discovery.cs.vt.edu/",
+    link: "https://jobhub.cs.vt.edu/",
     imageKey: "jobhub_image",
     achievements: [
       "Worked in a 5-person team to develop a web portal for Virginia Tech to manage its industry partnership programs.",
