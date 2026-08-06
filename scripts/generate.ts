@@ -1,28 +1,29 @@
 import dotenv from "dotenv";
 dotenv.config({ path: ".env.local" });
 
-import { DocumentInterface } from "@langchain/core/documents";
-import { RecursiveCharacterTextSplitter } from "langchain/text_splitter";
-import { getEmbeddingsCollection, getVectorStore } from "../src/lib/astradb";
+import { Document } from "@langchain/core/documents";
+import { RecursiveCharacterTextSplitter } from "@langchain/textsplitters";
+import { clearCollection, insertChunks } from "../src/lib/astradb";
 
 // import your config directly
 import { CONTACT, PROJECTS, EXPERIENCES } from "../src/data/portfolioConfig";
 
 async function generateEmbeddings() {
-  const vectorStore = await getVectorStore();
-  (await getEmbeddingsCollection()).deleteMany({});
+  await clearCollection();
 
   // build docs from structured config instead of parsing files
-  const docs: DocumentInterface[] = [];
+  const docs: Document[] = [];
 
   // CONTACT
   const contactSummary = CONTACT.map((c) => `${c.platform}: "${c.link}"`).join(
     ", ",
   );
-  docs.push({
-    pageContent: `Contact information available — ${contactSummary}`,
-    metadata: { url: "/contact", type: "contact" },
-  });
+  docs.push(
+    new Document({
+      pageContent: `Contact information available — ${contactSummary}`,
+      metadata: { url: "/contact", type: "contact" },
+    }),
+  );
 
   // PROJECTS
   PROJECTS.forEach((project) => {
@@ -34,15 +35,17 @@ async function generateEmbeddings() {
       project.tools && project.tools.length > 0
         ? `Built with ${project.tools.join(", ")}.`
         : "";
-    docs.push({
-      pageContent: `${project.title}: ${project.description} ${achievements} ${tools}`,
-      metadata: {
-        url: "/projects",
-        type: "project",
-        title: project.title,
-        link: project.link,
-      },
-    });
+    docs.push(
+      new Document({
+        pageContent: `${project.title}: ${project.description} ${achievements} ${tools}`,
+        metadata: {
+          url: "/projects",
+          type: "project",
+          title: project.title,
+          link: project.link,
+        },
+      }),
+    );
   });
 
   // EXPERIENCES
@@ -55,22 +58,29 @@ async function generateEmbeddings() {
       exp.tools && exp.tools.length > 0
         ? `Technologis Used: ${exp.tools.join(", ")}.`
         : "";
-    docs.push({
-      pageContent: `${exp.role} at ${exp.company} (${exp.date}): ${exp.description} ${achievements} ${tools}`,
-      metadata: {
-        url: "/experience",
-        type: "experience",
-        role: exp.role,
-        company: exp.company,
-      },
-    });
+    docs.push(
+      new Document({
+        pageContent: `${exp.role} at ${exp.company} (${exp.date}): ${exp.description} ${achievements} ${tools}`,
+        metadata: {
+          url: "/experience",
+          type: "experience",
+          role: exp.role,
+          company: exp.company,
+        },
+      }),
+    );
   });
 
-  // split + embed
+  // split + embed + insert
   const splitter = RecursiveCharacterTextSplitter.fromLanguage("markdown");
   const splitDocs = await splitter.splitDocuments(docs);
 
-  await vectorStore.addDocuments(splitDocs);
+  await insertChunks(
+    splitDocs.map((doc) => ({
+      pageContent: doc.pageContent,
+      metadata: doc.metadata,
+    })),
+  );
   // console.log(splitDocs);
 }
 

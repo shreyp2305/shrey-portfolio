@@ -1,9 +1,10 @@
 import { cn } from "@/lib/utils";
-import { Message, useChat } from "ai/react";
+import { useChat } from "@ai-sdk/react";
+import { UIMessage } from "ai";
 import { Bot, SendHorizonal, Trash, XCircle } from "lucide-react";
 import ReactMarkdown from "react-markdown";
 import Link from "next/link";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 
 interface AIChatBoxProps {
   open: boolean;
@@ -11,18 +12,13 @@ interface AIChatBoxProps {
 }
 
 export default function AIChatBox({ open, onClose }: AIChatBoxProps) {
-  const {
-    messages,
-    input,
-    handleInputChange,
-    handleSubmit,
-    setMessages,
-    isLoading,
-    error,
-  } = useChat();
+  const { messages, sendMessage, setMessages, status, error } = useChat();
 
+  const [input, setInput] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
+
+  const isLoading = status === "submitted" || status === "streaming";
 
   useEffect(() => {
     if (scrollRef.current) {
@@ -36,7 +32,14 @@ export default function AIChatBox({ open, onClose }: AIChatBoxProps) {
     }
   }, [open]);
 
-  const lastMessageIsUser = messages[messages.length - 1]?.role === "user";
+  const lastMessageIsUser = messages.at(-1)?.role === "user";
+
+  function handleSubmit(e: React.FormEvent) {
+    e.preventDefault();
+    if (!input.trim()) return;
+    sendMessage({ text: input });
+    setInput("");
+  }
 
   return (
     <div
@@ -58,7 +61,7 @@ export default function AIChatBox({ open, onClose }: AIChatBoxProps) {
               message={{
                 id: "loading",
                 role: "assistant",
-                content: "Thinking...",
+                parts: [{ type: "text", text: "Thinking..." }],
               }}
             />
           )}
@@ -67,7 +70,9 @@ export default function AIChatBox({ open, onClose }: AIChatBoxProps) {
               message={{
                 id: "error",
                 role: "assistant",
-                content: "Something went wrong. Please try again!",
+                parts: [
+                  { type: "text", text: "Something went wrong. Please try again!" },
+                ],
               }}
             />
           )}
@@ -96,7 +101,7 @@ export default function AIChatBox({ open, onClose }: AIChatBoxProps) {
           </button>
           <input
             value={input}
-            onChange={handleInputChange}
+            onChange={(e) => setInput(e.target.value)}
             placeholder="Say something..."
             className="grow rounded border bg-background px-3 py-3"
             ref={inputRef}
@@ -116,10 +121,14 @@ export default function AIChatBox({ open, onClose }: AIChatBoxProps) {
 }
 
 interface ChatMessageProps {
-  message: Message;
+  message: Pick<UIMessage, "id" | "role" | "parts">;
 }
-function ChatMessage({ message: { role, content } }: ChatMessageProps) {
+function ChatMessage({ message: { role, parts } }: ChatMessageProps) {
   const isAiMessage = role === "assistant";
+  const text = parts
+    .filter((part) => part.type === "text")
+    .map((part) => part.text)
+    .join("");
 
   return (
     <div
@@ -156,7 +165,7 @@ function ChatMessage({ message: { role, content } }: ChatMessageProps) {
             li: ({ node, ...props }) => <li {...props} className="mt-1" />,
           }}
         >
-          {content}
+          {text}
         </ReactMarkdown>
       </div>
     </div>

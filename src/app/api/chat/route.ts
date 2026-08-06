@@ -1,55 +1,29 @@
 import { ChatOpenAI } from "@langchain/openai";
-import {
-  LangChainStream,
-  Message as VercelChatMessage,
-  StreamingTextResponse,
-} from "ai";
-import {
-  ChatPromptTemplate,
-  PromptTemplate,
-  MessagesPlaceholder,
-} from "@langchain/core/prompts";
-import { createStuffDocumentsChain } from "langchain/chains/combine_documents";
-import { getVectorStore } from "@/lib/astradb";
-import { createRetrievalChain } from "langchain/chains/retrieval";
-import { HumanMessage, AIMessage } from "@langchain/core/messages";
-import { createHistoryAwareRetriever } from "langchain/chains/history_aware_retriever";
-import { UpstashRedisCache } from "@langchain/community/caches/upstash_redis";
-import { Redis } from "@upstash/redis";
+import { ChatPromptTemplate, MessagesPlaceholder } from "@langchain/core/prompts";
+import { toBaseMessages, toUIMessageStream } from "@ai-sdk/langchain";
+import { createUIMessageStreamResponse, UIMessage } from "ai";
+import { AstraRetriever } from "@/lib/astradb";
 
 export async function POST(req: Request) {
   try {
-    // const cache = new UpstashRedisCache({
-    //   client: Redis.fromEnv(),
-    // });
+    const { messages }: { messages: UIMessage[] } = await req.json();
 
-    const body = await req.json();
-    const messages = body.messages;
-    const currentMessageContent = messages[messages.length - 1].content;
-    const chatHistory = messages
-      .slice(0, -1)
-      .map((m: VercelChatMessage) =>
-        m.role === "user"
-          ? new HumanMessage(m.content)
-          : new AIMessage(m.content),
-      );
-
-    const { stream, handlers } = LangChainStream();
+    const langchainMessages = await toBaseMessages(messages);
+    const chatHistory = langchainMessages.slice(0, -1);
+    const currentMessageContent = langchainMessages.at(-1)?.text ?? "";
 
     const chatModel = new ChatOpenAI({
       modelName: "gpt-5",
       streaming: true,
-      callbacks: [handlers],
       verbosity: "low",
-      // cache,
     });
     const rephrasingModel = new ChatOpenAI({
       modelName: "gpt-5",
       verbose: true,
-      // cache,
     });
-    const retriever = (await getVectorStore()).asRetriever();
 
+    // Turn a follow-up question + chat history into a standalone search
+    // query for retrieval (replaces the old createHistoryAwareRetriever).
     const rephrasePrompt = ChatPromptTemplate.fromMessages([
       new MessagesPlaceholder("chat_history"),
       ["user", "{input}"],
@@ -59,15 +33,20 @@ export async function POST(req: Request) {
           "Don't leave out any relevant keywords, Only return the query and no other text.",
       ],
     ]);
-
-    const historyAwareRetrieverChain = await createHistoryAwareRetriever({
-      llm: rephrasingModel,
-      retriever,
-      rephrasePrompt,
+    const rephraseResult = await rephrasePrompt.pipe(rephrasingModel).invoke({
+      chat_history: chatHistory,
+      input: currentMessageContent,
     });
 
-    // this is a template for LangChain
-    const prompt = ChatPromptTemplate.fromMessages([
+    const retriever = new AstraRetriever();
+    const docs = await retriever.invoke(rephraseResult.text);
+    const context = docs
+      .map((doc) => `Page URL: ${doc.metadata.url}\n\nPage content:\n${doc.pageContent}`)
+      .join("\n-------------\n");
+
+    // Stuff the retrieved context into the system prompt and stream the
+    // answer (replaces createStuffDocumentsChain + createRetrievalChain).
+    const answerPrompt = ChatPromptTemplate.fromMessages([
       [
         "system",
         "You are a chatbot assistant for a personal portfolio website. You are representing Shrey Patel, a software engineer who loves building AI‑powered products and scalable systems. " +
@@ -81,26 +60,13 @@ export async function POST(req: Request) {
       ["user", "{input}"],
     ]);
 
-    const combineDocsChain = await createStuffDocumentsChain({
-      llm: chatModel,
-      prompt,
-      documentPrompt: PromptTemplate.fromTemplate(
-        "Page URL: {url}\n\nPage content:\n{page_content}",
-      ),
-      documentSeparator: "\n-------------\n",
-    });
-
-    const retrieverChain = await createRetrievalChain({
-      combineDocsChain,
-      retriever: historyAwareRetrieverChain,
-    });
-
-    retrieverChain.invoke({
-      input: currentMessageContent,
+    const stream = await answerPrompt.pipe(chatModel).stream({
+      context,
       chat_history: chatHistory,
+      input: currentMessageContent,
     });
 
-    return new StreamingTextResponse(stream);
+    return createUIMessageStreamResponse({ stream: toUIMessageStream(stream) });
   } catch (error) {
     console.log(error);
     return Response.json({ error: "Internal server error" }, { status: 500 });
