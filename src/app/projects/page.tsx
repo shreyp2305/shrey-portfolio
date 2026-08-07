@@ -49,8 +49,10 @@ export default function Projects() {
         {PROJECTS.map((project, idx) => (
           <motion.div
             key={idx}
-            className="flex flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-sm transition hover:shadow-md"
+            className="flex flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-sm"
             variants={cardVariants}
+            whileHover={{ y: -6, boxShadow: "0 12px 24px -8px rgb(0 0 0 / 0.18)" }}
+            transition={{ type: "spring", stiffness: 300, damping: 22 }}
           >
             {imageMap[project.imageKey] && (
               <div className="relative h-40 w-full">
@@ -85,14 +87,21 @@ export default function Projects() {
               )}
 
               {project.link && (
-                <Link
-                  href={project.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-auto inline-block rounded-xl bg-primary px-4 py-2 text-center text-sm font-medium text-primary-foreground transition hover:scale-105 hover:opacity-90"
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                  className="mt-auto"
                 >
-                  View Project
-                </Link>
+                  <Link
+                    href={project.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block rounded-xl bg-primary px-4 py-2 text-center text-sm font-medium text-primary-foreground transition hover:opacity-90"
+                  >
+                    View Project
+                  </Link>
+                </motion.div>
               )}
             </div>
           </motion.div>

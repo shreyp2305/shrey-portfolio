@@ -21,14 +21,17 @@ export default function ExperiencePage() {
     <div className="mx-auto max-w-4xl px-4 py-8">
       <div className="mb-8 flex items-center justify-between">
         <H1 className="text-3xl font-bold">Experience</H1>
-        <a
+        <motion.a
           href="/resume.pdf"
           target="_blank"
           rel="noopener noreferrer"
-          className="rounded-2xl bg-primary px-6 py-3 font-medium text-primary-foreground shadow-md transition hover:scale-105 hover:opacity-90"
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          transition={{ type: "spring", stiffness: 400, damping: 17 }}
+          className="rounded-2xl bg-primary px-6 py-3 font-medium text-primary-foreground shadow-md transition hover:opacity-90"
         >
           My Resume
-        </a>
+        </motion.a>
       </div>
 
       <motion.div
@@ -41,8 +44,10 @@ export default function ExperiencePage() {
         {EXPERIENCES.map((exp, idx) => (
           <motion.div
             key={idx}
-            className="rounded-2xl border border-border bg-card p-6 shadow-sm transition hover:shadow-md"
+            className="rounded-2xl border border-border bg-card p-6 shadow-sm"
             variants={cardVariants}
+            whileHover={{ y: -6, boxShadow: "0 12px 24px -8px rgb(0 0 0 / 0.18)" }}
+            transition={{ type: "spring", stiffness: 300, damping: 22 }}
           >
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
               <h2 className="text-xl font-semibold">
