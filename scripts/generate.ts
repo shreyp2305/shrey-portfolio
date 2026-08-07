@@ -6,7 +6,13 @@ import { RecursiveCharacterTextSplitter } from "@langchain/textsplitters";
 import { clearCollection, insertChunks } from "../src/lib/astradb";
 
 // import your config directly
-import { CONTACT, PROJECTS, EXPERIENCES } from "../src/data/portfolioConfig";
+import {
+  CONTACT,
+  SKILLS,
+  EDUCATION,
+  PROJECTS,
+  EXPERIENCES,
+} from "../src/data/portfolioConfig";
 
 async function generateEmbeddings() {
   await clearCollection();
@@ -24,6 +30,35 @@ async function generateEmbeddings() {
       metadata: { url: "/contact", type: "contact" },
     }),
   );
+
+  // SKILLS
+  const skillsSummary = SKILLS.map(
+    (s) => `${s.category}: ${s.items.join(", ")}`,
+  ).join(". ");
+  docs.push(
+    new Document({
+      pageContent: `Technical skills — ${skillsSummary}`,
+      metadata: { url: "/", type: "skills" },
+    }),
+  );
+
+  // EDUCATION
+  EDUCATION.forEach((edu) => {
+    const courses =
+      edu.courses && edu.courses.length > 0
+        ? `Relevant coursework: ${edu.courses.join(", ")}.`
+        : "";
+    docs.push(
+      new Document({
+        pageContent: `${edu.degree} from ${edu.school} (${edu.date}), ${edu.location}. GPA: ${edu.gpa}. ${courses}`,
+        metadata: {
+          url: "/",
+          type: "education",
+          title: edu.school,
+        },
+      }),
+    );
+  });
 
   // PROJECTS
   PROJECTS.forEach((project) => {
