@@ -126,7 +126,7 @@ export const EXPERIENCES = [
       "Designed and built a real-time operator handoff system in .NET enabling live ownership transfers across vehicle control queues, with atomic state transitions guaranteeing exclusive control with zero conflicts across 50+ concurrent users.",
       "Built an end-to-end test suite covering 23 mission-critical flows with Cypress and Cucumber, cutting release QA from 2 days to 20 minutes.",
     ],
-    tools: [".NET", "OpenLayers", "Cypress", "Cucumber"],
+    tools: [".NET", "React", "OpenLayers", "Cypress", "Cucumber", "Docker", "Kubernetes"],
   },
   {
     role: "Full-Stack Software Engineer Intern",
@@ -139,7 +139,7 @@ export const EXPERIENCES = [
       "Redesigned RabbitMQ message topology for ground station subsystems, reducing queuing latency 70% (800ms → 240ms) and eliminating message loss under peak operator load.",
       "Built an internal RAG agent over ops documentation, deflecting ~55% of tier-1 questions and rolling out to the full team.",
     ],
-    tools: ["Java", "RabbitMQ", "LangChain", "Docker", "Kubernetes"],
+    tools: ["React", "Spring Boot", "MongoDB", "RabbitMQ", "LangChain", "Docker", "Kubernetes"],
   },
   {
     role: "Full-Stack Software Engineer Intern",
@@ -154,6 +154,18 @@ export const EXPERIENCES = [
     tools: ["Python", "Oracle Database", "PL/SQL"],
   },
   {
+    role: "Teaching Assistant",
+    company: "Virginia Tech",
+    date: "May 2024 – Aug 2024",
+    description:
+      "Assisted in teaching the Relational Database Management Systems course, guiding students through lab exercises and conceptual lessons. Supported students with topics such as SQL optimization, schema design, normalization, indexing, and transaction processing.",
+    achievements: [
+      "Guided 80+ students through weekly lab sessions, providing support on database design and SQL queries", 
+      "Topics covered: query optimization, normalization, transaction management, indexing, ER modeling, schema design."
+    ],
+    tools: ["SQL"],
+  },
+  {
     role: "Full-Stack Software Engineer Intern",
     company: "Ventera",
     date: "May 2023 – Aug 2023",
@@ -163,6 +175,6 @@ export const EXPERIENCES = [
       "Scaled Node.js APIs serving 1,000+ daily users by migrating high-traffic endpoints to a Redis cache-aside pattern, cutting TTFB 90% and increasing throughput 3x.",
       "Identified over-provisioned Kubernetes workloads through a Jenkins-integrated performance testing suite, reducing CPU usage 25% and memory and pod counts 15%.",
     ],
-    tools: ["Node.js", "Redis", "Kubernetes", "Jenkins"],
+    tools: ["Node.js", "Angular", "Redis", "Kubernetes", "Jenkins", "Mocha", "Chai"],
   },
 ];
