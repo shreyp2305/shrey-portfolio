@@ -7,6 +7,55 @@ export const CONTACT = [
   { platform: "Github", link: "https://github.com/shreyp2305" },
 ];
 
+export const SKILLS = [
+  {
+    category: "Languages",
+    items: ["Java", "Python", "TypeScript/JavaScript", "C/C++", "C#", "SQL"],
+  },
+  {
+    category: "Frameworks & Libraries",
+    items: [
+      "Spring",
+      ".NET",
+      "Flask",
+      "React",
+      "Next.js",
+      "Node.js",
+      "LangChain",
+      "JUnit",
+      "Cypress",
+      "Jest",
+    ],
+  },
+  {
+    category: "Messaging & Databases",
+    items: ["RabbitMQ", "Kafka", "PostgreSQL", "MongoDB", "Redis"],
+  },
+  {
+    category: "Cloud/DevOps",
+    items: ["AWS", "Docker", "Kubernetes", "Jenkins", "Terraform", "Git"],
+  },
+];
+
+export const EDUCATION = [
+  {
+    school: "Virginia Tech",
+    degree: "Bachelor of Science, Computer Science",
+    date: "May 2025",
+    location: "Blacksburg, VA",
+    gpa: "3.9",
+    courses: [
+      "Data Structures and Algorithms",
+      "Operating Systems",
+      "Computer Architecture",
+      "Database Management Systems",
+      "Cloud Software Development",
+      "Intro to AI",
+      "Machine Learning",
+    ],
+  },
+];
+
 export const PROJECTS = [
   {
     title: "Personal Portfolio Website",
@@ -15,10 +64,8 @@ export const PROJECTS = [
     link: "https://github.com/shreyp2305/shrey-portfolio",
     imageKey: "personal_portfolio_website_image",
     achievements: [
-      "Built an AI-powered chatbot that answers natural language questions about portfolio content.",
-      "Orchestrated retrieval-augmented generation (RAG) through LangChain and Vercel’s AI SDK with GPT-5-nano.",
-      "Designed a AstraDB vector database to store OpenAI’s text-embeddings of portfolio data for semantic search.",
-      "Implemented cache-aware querying with a serverless Redis instance to reduce latency and operatonal costs.",
+      "Implemented a RAG pipeline using LangChain and GPT-5 to answer natural language queries about my experience, routing semantic search through a vector store via Vercel’s AI SDK.",
+      "Added a serverless Redis caching layer for repeated queries, reducing inference latency and cutting operational cost.",
     ],
     tools: [
       "Next.js",
@@ -34,15 +81,14 @@ export const PROJECTS = [
   {
     title: "Jobhub",
     description:
-      "Virginia Tech’s official portal for managing industry partnership programs and department workflows.",
-    link: "https://cssource-jh.discovery.cs.vt.edu/",
+      "Virginia Tech’s official industry-partnership portal, built as my senior capstone project.",
+    link: "https://jobhub.cs.vt.edu/",
     imageKey: "jobhub_image",
     achievements: [
-      "Worked in a 5-person team to develop a web portal for Virginia Tech to manage its industry partnership programs.",
-      "Enhanced Flask endpoints in Python, expanding parameters and enforcing JWT RBAC for confidential data.",
-      "Deployed workloads on Virginia Tech’s Kubernetes platform via GitLab CI/CD and Docker, ensuring reliable scaling.",
+      "Designed and shipped a university industry-partnership portal for Virginia Tech's CS department as primary backend developer on a 5-person team, serving 100+ industry partners.",
+      "Delivered a multi-tier sponsorship system in Flask and PostgreSQL managing partner relationships, event workflows, and financial tiers, replacing a manual email-based coordination process used by the department.",
     ],
-    tools: ["React", "Flask", "PostreSQL", "Docker", "Kubernetes"],
+    tools: ["React", "Flask", "PostgreSQL", "Docker", "Kubernetes"],
   },
   {
     title: "House.inc",
@@ -69,68 +115,66 @@ export const PROJECTS = [
 
 export const EXPERIENCES = [
   {
-    role: "Software Engineer Intern",
-    company: "Peraton",
-    date: "Fall 2024",
+    role: "Full-Stack Software Engineer",
+    company: "Integration Innovation",
+    date: "Oct 2025 – Present",
     description:
-      "Worked on NASA’s Space Exploration Network Services program, supporting telemetry tracking and command systems for 3+ ground stations.",
+      "Building the primary Command and Control (C2) platform for a fleet of autonomous vehicles, from geospatial mission planning to real-time operator handoff.",
     achievements: [
-      "Developed Java-based microservices and REST APIs to enable real-time satellite telemetry services across 3+ ground stations.",
-      "Transformed 20+ React components into reusable styled components, reducing future UI development time.",
-      "Refactored existing API structure for modem and switch telemetry endpoints, achieving 17% lower network overhead.",
-      "Implemented subsystem-specific RabbitMQ channels as part of a broader system re-architecture to reduce message queuing latency by 23%.",
+      "Shipped a Command and Control (C2) platform to production, becoming the default control path across 13 autonomous vehicles and the primary feature demoed to the US Marine Corps.",
+      "Built a geospatial mission-planning toolset on OpenLayers from scratch, enabling operators to define geofences, program search areas, and route autonomous vehicles directly on a live map.",
+      "Designed and built a real-time operator handoff system in .NET enabling live ownership transfers across vehicle control queues, with atomic state transitions guaranteeing exclusive control with zero conflicts across 50+ concurrent users.",
+      "Built an end-to-end test suite covering 23 mission-critical flows with Cypress and Cucumber, cutting release QA from 2 days to 20 minutes.",
     ],
-    tools: [
-      "React",
-      "Spring Boot",
-      "MongoDB",
-      "RabbitMQ",
-      "Docker",
-      "Kubernetes",
-    ],
+    tools: [".NET", "React", "OpenLayers", "Cypress", "Cucumber", "Docker", "Kubernetes"],
   },
   {
-    role: "Software Engineer Intern",
-    company: "CACI",
-    date: "Summer 2024",
+    role: "Full-Stack Software Engineer Intern",
+    company: "Peraton",
+    date: "Aug 2024 – Feb 2025",
     description:
-      "Contributed to the development and optimization of a large-scale ERP platform serving over 35 federal agencies.",
+      "Supported NASA's Space Exploration Network Services program, building high-throughput microservices for real-time satellite telemetry across a network of distributed ground stations.",
     achievements: [
-      "Reduced query execution time by 15% on transaction tables by implementing composite indexing and partitioning strategies.",
-      "Accelerated reporting turnaround from days to minutes by developing dynamic UI dashboards which enabled self-service access to financial and user activity data.",
-      "Designed Python pipelines to process 133K+ Active Directory records weekly, replacing legacy PowerShell scripts and improving runtime by 88%.",
+      "Engineered high-throughput Java microservices to orchestrate real-time NASA satellite telemetry streams across 5 distributed ground stations, ensuring zero data loss for 100+ concurrent flight controllers.",
+      "Redesigned RabbitMQ message topology for ground station subsystems, reducing queuing latency 70% (800ms → 240ms) and eliminating message loss under peak operator load.",
+      "Built an internal RAG agent over ops documentation, deflecting ~55% of tier-1 questions and rolling out to the full team.",
+    ],
+    tools: ["React", "Spring Boot", "MongoDB", "RabbitMQ", "LangChain", "Docker", "Kubernetes"],
+  },
+  {
+    role: "Full-Stack Software Engineer Intern",
+    company: "CACI",
+    date: "May 2024 – Aug 2024",
+    description:
+      "Contributed to an enterprise data platform, re-architecting a large-scale data validation engine and building internal analytics tooling.",
+    achievements: [
+      "Re-architected an enterprise data validation engine across 8M+ records, leveraging composite indexing to cut query latency by 80% (from 1s to under 200ms).",
+      "Built internal analytics APIs serving thousands of daily reports, replacing a $30K/year third-party vendor tool.",
     ],
     tools: ["Python", "Oracle Database", "PL/SQL"],
   },
   {
     role: "Teaching Assistant",
     company: "Virginia Tech",
-    date: "Spring 2024",
+    date: "May 2024 – Aug 2024",
     description:
       "Assisted in teaching the Relational Database Management Systems course, guiding students through lab exercises and conceptual lessons. Supported students with topics such as SQL optimization, schema design, normalization, indexing, and transaction processing.",
-    achievements: [],
+    achievements: [
+      "Guided 80+ students through weekly lab sessions, providing support on database design and SQL queries", 
+      "Topics covered: query optimization, normalization, transaction management, indexing, ER modeling, schema design."
+    ],
     tools: ["SQL"],
   },
   {
-    role: "Software Engineer Intern",
+    role: "Full-Stack Software Engineer Intern",
     company: "Ventera",
-    date: "Summer 2023",
+    date: "May 2023 – Aug 2023",
     description:
       "Contributed to an R&D team developing secure, cloud-based applications to support upcoming government contract bids.",
     achievements: [
-      "Deployed scalable RESTful APIs to handle user interaction and content delivery for 1,000+ daily users, incorporating optimized query handling and caching techniques.",
-      "Authored 30+ tests mocking API calls and components, raising code coverage from 67% to 97% post-rewrite.",
-      "Established performance testing suit integrated with Jenkins that uncovered excess Kubernetes resource allocations and cut CPU by 25% alongside memory and pods by 15%.",
-      "Integrated OAuth 2.0 and multi-factor authentication using Azure AD B2C to secure enterprise login workflows.",
+      "Scaled Node.js APIs serving 1,000+ daily users by migrating high-traffic endpoints to a Redis cache-aside pattern, cutting TTFB 90% and increasing throughput 3x.",
+      "Identified over-provisioned Kubernetes workloads through a Jenkins-integrated performance testing suite, reducing CPU usage 25% and memory and pod counts 15%.",
     ],
-    tools: [
-      "Express",
-      "Angular",
-      "Azure AD",
-      "Kubernetes",
-      "Jenkins",
-      "Mocha",
-      "Chai",
-    ],
+    tools: ["Node.js", "Angular", "Redis", "Kubernetes", "Jenkins", "Mocha", "Chai"],
   },
 ];

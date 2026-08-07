@@ -1,15 +1,16 @@
 "use client";
 
-import { Mail, Github, Linkedin } from "lucide-react";
+import { Mail } from "lucide-react";
 import { CONTACT } from "@/data/portfolioConfig";
 import Link from "next/link";
 import { H1 } from "@/components/ui/H1";
 import { motion } from "framer-motion";
+import { GithubIcon, LinkedinIcon } from "@/components/icons/BrandIcons";
 
 const iconMap: Record<string, React.ReactNode> = {
   Email: <Mail size={20} />,
-  LinkedIn: <Linkedin size={20} />,
-  Github: <Github size={20} />,
+  LinkedIn: <LinkedinIcon size={20} />,
+  Github: <GithubIcon size={20} />,
 };
 
 // Config for email link params
