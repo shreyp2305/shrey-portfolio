@@ -10,11 +10,11 @@ export default function ThemeToggle() {
     <button onClick={() => setTheme(theme === "dark" ? "light" : "dark")}>
       <Sun
         size={24}
-        className="absolute rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100"
+        className="absolute scale-0 rotate-90 cursor-pointer transition-all dark:scale-100 dark:rotate-0"
       />
       <Moon
         size={24}
-        className="rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0"
+        className="scale-100 rotate-0 cursor-pointer transition-all dark:scale-0 dark:-rotate-90"
       />
     </button>
   );
