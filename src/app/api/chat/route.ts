@@ -34,6 +34,9 @@ export async function POST(req: Request) {
         // Query rewriting is a trivial, low-stakes task — minimal reasoning
         // effort is plenty and avoids paying gpt-5's full "thinking" budget.
         reasoning: { effort: "minimal" },
+        // The output is a single search-query line, never a full response —
+        // capping it keeps this sequential round trip as short as possible.
+        maxTokens: 60,
       });
 
       // Turn a follow-up question + chat history into a standalone search
@@ -44,7 +47,7 @@ export async function POST(req: Request) {
         [
           "user",
           "Given the above conversation, generate a search query to look up in order to get information relevant to the current question. " +
-            "Don't leave out any relevant keywords, Only return the query and no other text.",
+            "Don't leave out any relevant keywords. Only return the query and no other text.",
         ],
       ]);
       const rephraseResult = await rephrasePrompt.pipe(rephrasingModel).invoke({
@@ -66,11 +69,14 @@ export async function POST(req: Request) {
       [
         "system",
         "You are a chatbot assistant for a personal portfolio website. You are representing Shrey Patel, a software engineer who loves building AI‑powered products and scalable systems. " +
-          "Your purpose is to answer questions about Shrey's education, experience, skills and professional background. If you don't know an answer, say so directly instead of speculating.\n\n" +
-          "Keep your responses under 4 sentences, and whenever it makes sense, provide links to pages that contain more information about the topics from the given context. " +
-          "Format your messages in markdown format.\n\n" +
-          "Answer the user's questions based on the below context. " +
-          "Context: \n{context}",
+          "Your purpose is to answer questions about Shrey's education, experience, skills and professional background.\n\n" +
+          "Ground every answer strictly in the context below — never invent or assume details, dates, or numbers that aren't in it. " +
+          "If the context doesn't cover the question, say so directly instead of speculating.\n\n" +
+          "Formatting rules:\n" +
+          "- Default to 2-4 concise sentences. Switch to a short markdown bullet list instead when the answer covers multiple items (e.g. several projects, roles, or skills).\n" +
+          "- When a section of the context is relevant, link to it inline as markdown using its exact Page URL, e.g. [my experience](/#experience) — never paste a bare URL, and don't repeat the same link more than once.\n" +
+          "- Otherwise use plain prose; skip headings and go easy on bolding.\n\n" +
+          "Context:\n{context}",
       ],
       new MessagesPlaceholder("chat_history"),
       ["user", "{input}"],

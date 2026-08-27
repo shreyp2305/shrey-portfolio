@@ -121,12 +121,20 @@ export const EXPERIENCES = [
     description:
       "Building the primary Command and Control (C2) platform for a fleet of autonomous vehicles, from geospatial mission planning to real-time operator handoff.",
     achievements: [
-      "Shipped a Command and Control (C2) platform to production, becoming the default control path across 13 autonomous vehicles and the primary feature demoed to the US Marine Corps.",
+      "Shipped a Command and Control (C2) platform to production, becoming the default control path across 13 autonomous vehicles and the primary feature demoed to prospective customers.",
       "Built a geospatial mission-planning toolset on OpenLayers from scratch, enabling operators to define geofences, program search areas, and route autonomous vehicles directly on a live map.",
       "Designed and built a real-time operator handoff system in .NET enabling live ownership transfers across vehicle control queues, with atomic state transitions guaranteeing exclusive control with zero conflicts across 50+ concurrent users.",
       "Built an end-to-end test suite covering 23 mission-critical flows with Cypress and Cucumber, cutting release QA from 2 days to 20 minutes.",
     ],
-    tools: [".NET", "React", "OpenLayers", "Cypress", "Cucumber", "Docker", "Kubernetes"],
+    tools: [
+      ".NET",
+      "React",
+      "OpenLayers",
+      "Cypress",
+      "Cucumber",
+      "Docker",
+      "Kubernetes",
+    ],
   },
   {
     role: "Full-Stack Software Engineer Intern",
@@ -139,7 +147,15 @@ export const EXPERIENCES = [
       "Redesigned RabbitMQ message topology for ground station subsystems, reducing queuing latency 70% (800ms → 240ms) and eliminating message loss under peak operator load.",
       "Built an internal RAG agent over ops documentation, deflecting ~55% of tier-1 questions and rolling out to the full team.",
     ],
-    tools: ["React", "Spring Boot", "MongoDB", "RabbitMQ", "LangChain", "Docker", "Kubernetes"],
+    tools: [
+      "React",
+      "Spring Boot",
+      "MongoDB",
+      "RabbitMQ",
+      "LangChain",
+      "Docker",
+      "Kubernetes",
+    ],
   },
   {
     role: "Full-Stack Software Engineer Intern",
@@ -160,8 +176,8 @@ export const EXPERIENCES = [
     description:
       "Assisted in teaching the Relational Database Management Systems course, guiding students through lab exercises and conceptual lessons. Supported students with topics such as SQL optimization, schema design, normalization, indexing, and transaction processing.",
     achievements: [
-      "Guided 80+ students through weekly lab sessions, providing support on database design and SQL queries", 
-      "Topics covered: query optimization, normalization, transaction management, indexing, ER modeling, schema design."
+      "Guided 80+ students through weekly lab sessions, providing support on database design and SQL queries",
+      "Topics covered: query optimization, normalization, transaction management, indexing, ER modeling, schema design.",
     ],
     tools: ["SQL"],
   },
@@ -173,8 +189,17 @@ export const EXPERIENCES = [
       "Contributed to an R&D team developing secure, cloud-based applications to support upcoming government contract bids.",
     achievements: [
       "Scaled Node.js APIs serving 1,000+ daily users by migrating high-traffic endpoints to a Redis cache-aside pattern, cutting TTFB 90% and increasing throughput 3x.",
+      "Raised code coverage from 67% to 97% by authoring 30+ Jest unit tests mocking API calls and React component interactions.",
       "Identified over-provisioned Kubernetes workloads through a Jenkins-integrated performance testing suite, reducing CPU usage 25% and memory and pod counts 15%.",
     ],
-    tools: ["Node.js", "Angular", "Redis", "Kubernetes", "Jenkins", "Mocha", "Chai"],
+    tools: [
+      "Node.js",
+      "Angular",
+      "Redis",
+      "Kubernetes",
+      "Jenkins",
+      "Mocha",
+      "Chai",
+    ],
   },
 ];

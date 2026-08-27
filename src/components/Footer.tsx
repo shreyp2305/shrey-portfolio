@@ -4,7 +4,7 @@ export default function Footer() {
   return (
     <footer>
       <nav className="mx-auto flex max-w-3xl gap-3 p-3">
-        <Link href="/contact">Contact</Link>
+        <Link href="#contact">Contact</Link>
       </nav>
     </footer>
   );
