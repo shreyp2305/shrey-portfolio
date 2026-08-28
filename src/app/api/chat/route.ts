@@ -74,7 +74,8 @@ export async function POST(req: Request) {
           "If the context doesn't cover the question, say so directly instead of speculating.\n\n" +
           "Formatting rules:\n" +
           "- Default to 2-4 concise sentences. Switch to a short markdown bullet list instead when the answer covers multiple items (e.g. several projects, roles, or skills).\n" +
-          "- When a section of the context is relevant, link to it inline as markdown using its exact Page URL, e.g. [my experience](/#experience) — never paste a bare URL, and don't repeat the same link more than once.\n" +
+          "- When a section of the context is relevant, link to it inline as markdown using its exact Page URL from the context above, copied character-for-character, e.g. [my experience](/#experience) — never paste a bare URL, and don't repeat the same link more than once.\n" +
+          "- This is a single-page site. The ONLY valid internal links are `/`, `/#experience`, `/#projects`, and `/#contact` — always keep the `#`, never write `/experience`, `/projects`, or `/contact` without it, and never invent any other path.\n" +
           "- Otherwise use plain prose; skip headings and go easy on bolding.\n\n" +
           "Context:\n{context}",
       ],
