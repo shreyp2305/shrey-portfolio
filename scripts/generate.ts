@@ -27,7 +27,7 @@ async function generateEmbeddings() {
   docs.push(
     new Document({
       pageContent: `Contact information available — ${contactSummary}`,
-      metadata: { url: "/contact", type: "contact" },
+      metadata: { url: "/#contact", type: "contact" },
     }),
   );
 
@@ -74,7 +74,7 @@ async function generateEmbeddings() {
       new Document({
         pageContent: `${project.title}: ${project.description} ${achievements} ${tools}`,
         metadata: {
-          url: "/projects",
+          url: "/#projects",
           type: "project",
           title: project.title,
           link: project.link,
@@ -97,7 +97,7 @@ async function generateEmbeddings() {
       new Document({
         pageContent: `${exp.role} at ${exp.company} (${exp.date}): ${exp.description} ${achievements} ${tools}`,
         metadata: {
-          url: "/experience",
+          url: "/#experience",
           type: "experience",
           role: exp.role,
           company: exp.company,

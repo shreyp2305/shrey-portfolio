@@ -26,7 +26,7 @@ portfolioConfig.ts → generate.ts (embed + upsert) → AstraDB vector store
 User message → /api/chat → history-aware retriever → context-grounded GPT answer → streamed to AIChatBox
 ```
 
-- `src/data/portfolioConfig.ts` is the **single source of truth**: it exports `CONTACT`, `PROJECTS`, `EXPERIENCES`, which both render the `/contact`, `/projects`, `/experience` pages *and* seed the chatbot's knowledge.
+- `src/data/portfolioConfig.ts` is the **single source of truth**: it exports `CONTACT`, `PROJECTS`, `EXPERIENCES`, which both render the Projects/Experience/Contact sections of the single-page site *and* seed the chatbot's knowledge.
 - `scripts/generate.ts` (`npm run generate`) reads that config, builds one document per entry, splits it, embeds it with OpenAI, and upserts into AstraDB — wiping the collection first. Must be re-run manually whenever `portfolioConfig.ts` changes; nothing does this automatically.
 - `src/app/api/chat/route.ts` rephrases the user's question using chat history (history-aware retriever), retrieves matching docs from AstraDB (`src/lib/astradb.ts`), and streams a GPT-5 answer grounded in that context back to the client.
 - `src/components/AIChatButton.tsx` / `AIChatBox.tsx` drive the chat UI via `ai/react`'s `useChat`.
@@ -40,14 +40,11 @@ User message → /api/chat → history-aware retriever → context-grounded GPT 
 
 ```
 shrey-portfolio/
-  📱 src/app/                # Next.js App Router — pages + API routes
+  📱 src/app/                # Next.js App Router — single-page site + API routes
     layout.tsx                # Root layout: fonts, ThemeProvider, Navbar, Analytics
-    page.tsx                  # Home page
-    projects/page.tsx         # Projects page (renders PROJECTS)
-    experience/page.tsx       # Experience page (renders EXPERIENCES)
-    contact/page.tsx          # Contact page (renders CONTACT)
+    page.tsx                  # Single-page site: Home/Projects/Experience/Contact sections (#home, #projects, #experience, #contact)
     api/chat/route.ts         # RAG chat endpoint (POST, streaming)
-    globals.css                # Tailwind base + theme CSS variables
+    globals.css                # Tailwind base + theme CSS variables, smooth in-page anchor scrolling
   🧩 src/components/          # UI components
     Navbar.tsx / Footer.tsx    # Layout chrome
     ThemeProvider.tsx / ThemeToggle.tsx
@@ -94,6 +91,7 @@ shrey-portfolio/
 - History-aware retrieval means follow-up questions are rephrased with prior chat context before hitting the vector store.
 - Redis caching (`UpstashRedisCache`) is wired into `route.ts` but currently commented out on both the chat and rephrasing models.
 
-### Config-driven content pages
+### Config-driven content sections
 
-- `/projects`, `/experience`, `/contact` have no hardcoded markup for their list content — they map directly over `portfolioConfig.ts` exports, so adding a project/role/contact method is a data-only change (plus re-running `npm run generate` for the chatbot to know about it).
+- The Projects, Experience, and Contact sections (`#projects`, `#experience`, `#contact` on the single home page) have no hardcoded markup for their list content — they map directly over `portfolioConfig.ts` exports, so adding a project/role/contact method is a data-only change (plus re-running `npm run generate` for the chatbot to know about it).
+- The Navbar links and the chatbot's cited links (`generate.ts` metadata `url` fields) point at in-page anchors (`/#projects`, `/#experience`, `/#contact`) rather than separate routes.
