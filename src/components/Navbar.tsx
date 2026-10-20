@@ -6,19 +6,20 @@ import AIChatButton from "./AIChatButton";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
 
-// Extract links outside the component
+// Extract links outside the component — all sections live on the single
+// home page, so these are in-page anchors rather than separate routes.
 const NAV_LINKS = [
-  { href: "/", label: "Home" },
-  { href: "/projects", label: "Projects" },
-  { href: "/experience", label: "Experience" },
-  { href: "/contact", label: "Contact" },
+  { href: "#home", label: "Home" },
+  { href: "#experience", label: "Experience" },
+  { href: "#projects", label: "Projects" },
+  { href: "#contact", label: "Contact" },
 ];
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border bg-background">
+    <header className="border-border bg-background sticky top-0 z-50 w-full border-b">
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
         {/* Left side: logo + menu */}
         <div className="flex items-center gap-4">
@@ -33,16 +34,16 @@ export default function Navbar() {
                 size={28}
                 className={`absolute transition-all duration-300 ${
                   menuOpen
-                    ? "rotate-90 scale-0 opacity-0"
-                    : "rotate-0 scale-100 opacity-100"
+                    ? "scale-0 rotate-90 opacity-0"
+                    : "scale-100 rotate-0 opacity-100"
                 }`}
               />
               <X
                 size={28}
                 className={`absolute transition-all duration-300 ${
                   menuOpen
-                    ? "rotate-0 scale-100 opacity-100"
-                    : "-rotate-90 scale-0 opacity-0"
+                    ? "scale-100 rotate-0 opacity-100"
+                    : "scale-0 -rotate-90 opacity-0"
                 }`}
               />
             </div>
@@ -54,9 +55,7 @@ export default function Navbar() {
               <Link
                 key={href}
                 href={href}
-                className="relative px-2 py-1 transition-all duration-200 before:absolute
-                  before:bottom-0 before:left-0 before:h-0.5 before:w-0 before:bg-primary before:transition-all before:duration-200 hover:text-primary
-                  hover:before:w-full"
+                className="before:bg-primary hover:text-primary relative px-2 py-1 transition-all duration-200 before:absolute before:bottom-0 before:left-0 before:h-0.5 before:w-0 before:transition-all before:duration-200 hover:before:w-full"
               >
                 {label}
               </Link>
@@ -73,13 +72,13 @@ export default function Navbar() {
 
       {/* Mobile menu dropdown */}
       {menuOpen && (
-        <div className="space-y-4 border-t border-border bg-background px-6 py-4 text-lg font-semibold sm:hidden">
+        <div className="border-border bg-background space-y-4 border-t px-6 py-4 text-lg font-semibold sm:hidden">
           {NAV_LINKS.map(({ href, label }) => (
             <Link
               key={href}
               href={href}
               onClick={() => setMenuOpen(false)}
-              className="block transition-colors hover:text-primary"
+              className="hover:text-primary block transition-colors"
             >
               {label}
             </Link>
