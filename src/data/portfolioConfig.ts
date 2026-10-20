@@ -148,15 +148,6 @@ export const EXPERIENCES = [
       "Docker",
       "Kubernetes",
     ],
-    tools: [
-      "React",
-      "Spring Boot",
-      "MongoDB",
-      "RabbitMQ",
-      "LangChain",
-      "Docker",
-      "Kubernetes",
-    ],
   },
   {
     role: "Full-Stack Software Engineer Intern",
@@ -191,15 +182,6 @@ export const EXPERIENCES = [
     achievements: [
       "Scaled Node.js APIs by transitioning high-traffic endpoints to a Redis cache-aside architecture, cutting Time-to-First-Byte (TTFB) by 90% and increasing throughput 3x.",
       "Identified over-provisioned Kubernetes workloads through a Jenkins-integrated performance testing suite, reducing CPU usage 25% and memory and pod counts 15%.",
-    ],
-    tools: [
-      "Node.js",
-      "Angular",
-      "Redis",
-      "Kubernetes",
-      "Jenkins",
-      "Mocha",
-      "Chai",
     ],
     tools: [
       "Node.js",
