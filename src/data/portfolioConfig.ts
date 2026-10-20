@@ -119,14 +119,14 @@ export const EXPERIENCES = [
     company: "Integration Innovation",
     date: "Oct 2025 – Present",
     description:
-      "Building the primary Command and Control (C2) platform for a fleet of autonomous vehicles, from geospatial mission planning to real-time operator handoff.",
+      "Building the primary Command and Control (C2) platform for a fleet of autonomous vehicles.",
     achievements: [
-      "Shipped a Command and Control (C2) platform to production, becoming the default control path across 13 autonomous vehicles and the primary feature demoed to the US Marine Corps.",
-      "Built a geospatial mission-planning toolset on OpenLayers from scratch, enabling operators to define geofences, program search areas, and route autonomous vehicles directly on a live map.",
-      "Designed and built a real-time operator handoff system in .NET enabling live ownership transfers across vehicle control queues, with atomic state transitions guaranteeing exclusive control with zero conflicts across 50+ concurrent users.",
-      "Built an end-to-end test suite covering 23 mission-critical flows with Cypress and Cucumber, cutting release QA from 2 days to 20 minutes.",
+      "Designed and shipped key architectural components of a web-based UAS collaborative ground control client (GCS), advancing a prototype toward a production-ready system.",
+      "Developed testing frameworks and CI/CD pipelines for the GCS client, supporting integration, deployment, and collaboration with vendors and program stakeholders.",
+      "Engineered reusable interaction and rendering workflows for complex geospatial interfaces, improving consistency across mission-planning tools.",
+      "Contributed to fielded autonomy software for uncrewed aerial and ground platforms as part of a cross-functional team, supporting on-site system integration events.",
     ],
-    tools: [".NET", "React", "OpenLayers", "Cypress", "Cucumber", "Docker", "Kubernetes"],
+    tools: [".NET", "React", "OpenLayers", "Cypress", "Docker", "Kubernetes"],
   },
   {
     role: "Full-Stack Software Engineer Intern",
@@ -136,10 +136,18 @@ export const EXPERIENCES = [
       "Supported NASA's Space Exploration Network Services program, building high-throughput microservices for real-time satellite telemetry across a network of distributed ground stations.",
     achievements: [
       "Engineered high-throughput Java microservices to orchestrate real-time NASA satellite telemetry streams across 5 distributed ground stations, ensuring zero data loss for 100+ concurrent flight controllers.",
-      "Redesigned RabbitMQ message topology for ground station subsystems, reducing queuing latency 70% (800ms → 240ms) and eliminating message loss under peak operator load.",
-      "Built an internal RAG agent over ops documentation, deflecting ~55% of tier-1 questions and rolling out to the full team.",
+      "Reduced P99 message latency by 40% under heavy loads by isolating workloads into subsystem-specific RabbitMQ channels.",
+      "Partnered with a cross-functional Agile team to deliver new functionality, inform stakeholders, and track KPIs via Jira and Confluence.",
     ],
-    tools: ["React", "Spring Boot", "MongoDB", "RabbitMQ", "LangChain", "Docker", "Kubernetes"],
+    tools: [
+      "React",
+      "Spring Boot",
+      "MongoDB",
+      "RabbitMQ",
+      "LangChain",
+      "Docker",
+      "Kubernetes",
+    ],
   },
   {
     role: "Full-Stack Software Engineer Intern",
@@ -148,10 +156,10 @@ export const EXPERIENCES = [
     description:
       "Contributed to an enterprise data platform, re-architecting a large-scale data validation engine and building internal analytics tooling.",
     achievements: [
-      "Re-architected an enterprise data validation engine across 8M+ records, leveraging composite indexing to cut query latency by 80% (from 1s to under 200ms).",
-      "Built internal analytics APIs serving thousands of daily reports, replacing a $30K/year third-party vendor tool.",
+      "Built CI/CD pipelines utilizing Terraform to automate AWS resource creation, detect configuration changes, post PR comments with Terraform plans, and enforce approval steps.",
+      "Optimized data validation queries across 8M+ records using composite indexes, reducing query latency by 80%.",
     ],
-    tools: ["Python", "Oracle Database", "PL/SQL"],
+    tools: ["AWS", "Python", "Oracle Database", "PL/SQL"],
   },
   {
     role: "Teaching Assistant",
@@ -160,8 +168,8 @@ export const EXPERIENCES = [
     description:
       "Assisted in teaching the Relational Database Management Systems course, guiding students through lab exercises and conceptual lessons. Supported students with topics such as SQL optimization, schema design, normalization, indexing, and transaction processing.",
     achievements: [
-      "Guided 80+ students through weekly lab sessions, providing support on database design and SQL queries", 
-      "Topics covered: query optimization, normalization, transaction management, indexing, ER modeling, schema design."
+      "Guided 80+ students through weekly lab sessions, providing support on database design and SQL queries",
+      "Topics covered: query optimization, normalization, transaction management, indexing, ER modeling, schema design.",
     ],
     tools: ["SQL"],
   },
@@ -170,11 +178,19 @@ export const EXPERIENCES = [
     company: "Ventera",
     date: "May 2023 – Aug 2023",
     description:
-      "Contributed to an R&D team developing secure, cloud-based applications to support upcoming government contract bids.",
+      "Contributed to an R&D team developing secure, cloud-based applications to support upcoming government contracts.",
     achievements: [
-      "Scaled Node.js APIs serving 1,000+ daily users by migrating high-traffic endpoints to a Redis cache-aside pattern, cutting TTFB 90% and increasing throughput 3x.",
+      "Scaled Node.js APIs by transitioning high-traffic endpoints to a Redis cache-aside architecture, cutting Time-to-First-Byte (TTFB) by 90% and increasing throughput 3x.",
       "Identified over-provisioned Kubernetes workloads through a Jenkins-integrated performance testing suite, reducing CPU usage 25% and memory and pod counts 15%.",
     ],
-    tools: ["Node.js", "Angular", "Redis", "Kubernetes", "Jenkins", "Mocha", "Chai"],
+    tools: [
+      "Node.js",
+      "Angular",
+      "Redis",
+      "Kubernetes",
+      "Jenkins",
+      "Mocha",
+      "Chai",
+    ],
   },
 ];
